@@ -7,38 +7,30 @@ namespace Giraffe
     {
         static void Main(string[] args)
         {
+            string guess;
+            string secretWord = "giraffe";
+            int guessCount = 0;
+            int guessLimit = 3;
+            bool outOfGuesses = false;
 
             try
             {
-                Console.WriteLine();
-                Console.Write("Enter day number: ");
-                Console.WriteLine(GetDay(Console.ReadLine()));
+                do
+                {
+                    Console.Write("Enter guess: ");
+                    guess = Console.ReadLine();
+                    guessCount++;
+                    if (guessCount == guessLimit) outOfGuesses = true;
+                } while (guess != secretWord && !outOfGuesses);
+
+                if (guess == secretWord) Console.WriteLine("You Win!");
+                else Console.WriteLine("You Lose!");
             }
             catch
             {
                 Console.Write("I quit. I quit, I quit, I quit!");
             }
         }
-
-        static string GetDay (string dayNum)
-        {
-            string dayName;
-
-            switch(dayNum)
-            {
-                case "0": dayName = "Sunday"; break;
-                case "1": dayName = "Monday"; break;
-                case "2": dayName = "Tuesday"; break;
-                case "3": dayName = "Wednesday"; break;
-                case "4": dayName = "Thursday"; break;
-                case "5": dayName = "Friday"; break;
-                case "6": dayName = "Saturday"; break;
-                default: dayName = "What what what day"; break;
-            }
-            return dayName;
-
-        }
-
     }
 }
 
