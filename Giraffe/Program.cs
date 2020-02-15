@@ -56,14 +56,14 @@ namespace Giraffe
             }        
             else if (Regex.IsMatch(exp, validNonExpPattern3) || Regex.IsMatch(exp, validNonExpPattern4))
             {
-                if (Regex.IsMatch(exp, validNonExpPattern4)) exp = exp.Replace("(", "").Replace(")", "");
+                if (Regex.IsMatch(exp, validNonExpPattern4)) exp = exp.Replace("(","").Replace(")","");
                 if      (Regex.IsMatch(exp, validNonExpNegativePattern1)) return $"\nAnswer is: {Convert.ToDouble(exp.Substring(0, exp.IndexOf('-'                      )))}\n";
                 else if (Regex.IsMatch(exp, validNonExpNegativePattern2)) return $"\nAnswer is: {Convert.ToDouble(exp.Substring(0, exp.IndexOf('-', exp.IndexOf('-') + 1)))}\n";
-                else return $"\nAnswer is: {Convert.ToDouble(exp.Replace("/", "").Replace("*", "").Replace("+", ""))}\n";
+                else return $"\nAnswer is: {Convert.ToDouble(exp.Replace("/","").Replace("*","").Replace("+",""))}\n";
             }
             else if (Regex.IsMatch(exp, validExpPattern1) || Regex.IsMatch(exp, validExpPattern2) || Regex.IsMatch(exp, validExpPattern3) || Regex.IsMatch(exp, validExpPattern4)) 
             { 
-                if (Regex.IsMatch(exp, validExpPattern2) || Regex.IsMatch(exp, validExpPattern3) || Regex.IsMatch(exp, validExpPattern4)) exp = exp.Replace("(", "").Replace(")", "");
+                if (Regex.IsMatch(exp, validExpPattern2) || Regex.IsMatch(exp, validExpPattern3) || Regex.IsMatch(exp, validExpPattern4)) exp = exp.Replace("(","").Replace(")","");
                 if      (exp.Contains('/')) return $"\nAnswer is: {Convert.ToDouble(exp.Substring(0, exp.IndexOf('/'))) / Convert.ToDouble(exp.Substring(exp.IndexOf('/') + 1))}\n";
                 else if (exp.Contains('*')) return $"\nAnswer is: {Convert.ToDouble(exp.Substring(0, exp.IndexOf('*'))) * Convert.ToDouble(exp.Substring(exp.IndexOf('*') + 1))}\n";
                 else if (exp.Contains('+')) return $"\nAnswer is: {Convert.ToDouble(exp.Substring(0, exp.IndexOf('+'))) + Convert.ToDouble(exp.Substring(exp.IndexOf('+') + 1))}\n";
