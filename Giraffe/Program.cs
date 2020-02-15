@@ -35,20 +35,20 @@ namespace Giraffe
         }
 
         static string Calculator (string exp)
-        {
-            string validNonExpPattern1          = @"^\s*-?\d+(\.\d+)?\s*$";
-            string validNonExpPattern2          = @"^\s*\(\s*-?\d+(\.\d+)?\s*\)\s*$";
-            string validNonExpPattern3          = @"^\s*-?\d+(\.\d+)?\s*[\+\-\*\/]\s*$";
-            string validNonExpPattern4          = @"^\s*\(\s*-?\d+(\.\d+)?\s*\)\s*[\+\-\*\/]\s*$";
-            string validNonExpNegativePattern1  = @"^\s*\d+(\.\d+)?\s*\-?\s*$";
-            string validNonExpNegativePattern2  = @"^\s*\-\d+(\.\d+)?\s*\-?\s*$";
-            string validExpPattern1             = @"^\s*-?\d+(\.\d+)?\s*[\+\-\*\/]\s*-?\d+(\.\d+)?\s*$";
-            string validExpPattern2             = @"^\s*\(\s*-?\d+(\.\d+)?\s*\)\s*[\+\-\*\/]\s*-?\d+(\.\d+)?\s*$";
-            string validExpPattern3             = @"^\s*-?\d+(\.\d+)?\s*[\+\-\*\/]\s*\(\s*-?\d+(\.\d+)?\s*\)\s*$";
-            string validExpPattern4             = @"^\s*\(\s*-?\d+(\.\d+)?\s*\)\s*[\+\-\*\/]\s*\(\s*-?\d+(\.\d+)?\s*\)\s*$";
-            string validNegativePattern1        = @"^\s*\d+(\.\d+)?\s*\-\s*\-?\d+(\.\d+)?\s*$";
-            string validNegativePattern2        = @"^\s*\-\d+(\.\d+)?\s*\-\s*\-?\d+(\.\d+)?\s*$";
-
+        {                                                                                                                       // @"..." - verbatim string, i.e. passed through C# as is to Regex engine
+            string validNonExpPattern1          = @"^\s*-?\d+(\.\d+)?\s*$";                                                     // ^ - match has to occur at the beginning of the string
+            string validNonExpPattern2          = @"^\s*\(\s*-?\d+(\.\d+)?\s*\)\s*$";                                           // \s* - 0 or more white-space characters
+            string validNonExpPattern3          = @"^\s*-?\d+(\.\d+)?\s*[\+\-\*\/]\s*$";                                        // -? - 0 or 1 occurence of "-"
+            string validNonExpPattern4          = @"^\s*\(\s*-?\d+(\.\d+)?\s*\)\s*[\+\-\*\/]\s*$";                              // \d+ - 1 or more occurence of digit
+            string validNonExpNegativePattern1  = @"^\s*\d+(\.\d+)?\s*\-?\s*$";                                                 // (\.\d+)? - 0 or 1 occurence of "." and 1 or more digits
+            string validNonExpNegativePattern2  = @"^\s*\-\d+(\.\d+)?\s*\-?\s*$";                                               // \( - "("
+            string validExpPattern1             = @"^\s*-?\d+(\.\d+)?\s*[\+\-\*\/]\s*-?\d+(\.\d+)?\s*$";                        // \) - ")"
+            string validExpPattern2             = @"^\s*\(\s*-?\d+(\.\d+)?\s*\)\s*[\+\-\*\/]\s*-?\d+(\.\d+)?\s*$";              // [...] - any one of characters
+            string validExpPattern3             = @"^\s*-?\d+(\.\d+)?\s*[\+\-\*\/]\s*\(\s*-?\d+(\.\d+)?\s*\)\s*$";              // \+ - "+"
+            string validExpPattern4             = @"^\s*\(\s*-?\d+(\.\d+)?\s*\)\s*[\+\-\*\/]\s*\(\s*-?\d+(\.\d+)?\s*\)\s*$";    // \- - "-"
+            string validNegativePattern1        = @"^\s*\d+(\.\d+)?\s*\-\s*\-?\d+(\.\d+)?\s*$";                                 // \* - "*"
+            string validNegativePattern2        = @"^\s*\-\d+(\.\d+)?\s*\-\s*\-?\d+(\.\d+)?\s*$";                               // \/ - "/"
+                                                                                                                                // $ - match has to end at the end of the string
             if (Regex.IsMatch(exp, validNonExpPattern1) || Regex.IsMatch(exp, validNonExpPattern2))
             {
                 if (Regex.IsMatch(exp, validNonExpPattern2)) exp = exp.Replace("(","").Replace(")","");
